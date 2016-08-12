@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 use strict;
 use Clipboard;
+use File::Temp qw( tempfile );
 
 my $orig = Clipboard->paste;
 
-my $tmpfilename = "/tmp/clipedit$$";
+my ($tmpfile, $tmpfilename) = tempfile();
 open my $tmpfile, ">$tmpfilename" or die "Failure to open $tmpfilename: $!";
 print $tmpfile $orig;
 close $tmpfile;
